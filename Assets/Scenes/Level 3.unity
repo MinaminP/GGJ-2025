@@ -870,8 +870,8 @@ MonoBehaviour:
   - {fileID: 1578771641}
   - {fileID: 516334821}
   pauseButton: {fileID: 1764334052}
-  currentlevel: 1
-  nextLevel: 2
+  currentlevel: 3
+  nextLevel: 3
 --- !u!4 &556907901
 Transform:
   m_ObjectHideFlags: 0
@@ -2286,7 +2286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1537115582
 RectTransform:
   m_ObjectHideFlags: 0
