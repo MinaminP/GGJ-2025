@@ -22,4 +22,8 @@ public class SceneMover : MonoBehaviour
     {
         SceneManager.LoadScene(NamaScene);
     }
+    public void Keluar()
+    {
+        Application.Quit();
+    }
 }
