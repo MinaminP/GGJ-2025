@@ -17,6 +17,7 @@ public class CatTurun : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField] float moveInput;
+    [SerializeField] Sprite dropletSprite, bubbleSprite, bubblePopSprite;
 
     public float maxScale;
     public float currentScale;
@@ -35,20 +36,7 @@ public class CatTurun : MonoBehaviour
     }
     void Update()
     {
-
-        /*if (Input.GetKeyDown(KeyCode.D) && !isMovingSideways)
-        {
-            StartCoroutine(MoveHorizontal(Vector3.right));
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.A) && !isMovingSideways)
-        {
-            StartCoroutine(MoveHorizontal(Vector3.left));
-        }*/
-
         Movement();
-
     }
 
     void Movement()
@@ -56,9 +44,11 @@ public class CatTurun : MonoBehaviour
         if (Input.GetAxis("Horizontal") == 0)
         {
             isMovingSideways = false;
+            //sprite.sprite = dropletSprite;
         } 
         else
         {
+            //sprite.sprite = bubbleSprite;
             isMovingSideways = true;
         }
 
@@ -66,7 +56,8 @@ public class CatTurun : MonoBehaviour
         {
             transform.Translate(Vector3.down * CurrentSpeed * Time.deltaTime);
             DecreaseScale();
-        } else
+        } 
+        else
         {
             IncreaseScale();
         }
@@ -81,7 +72,7 @@ public class CatTurun : MonoBehaviour
         if (currentScale <= 0.2f)
         {
             currentScale = 0.2f;
-        }
+        }   
         else
         {
             currentScale -= Time.deltaTime / shrinkRate;
@@ -98,9 +89,16 @@ public class CatTurun : MonoBehaviour
         else
         {
             currentScale = maxScale;
+            StartCoroutine(BubblePop());
         }
     }
 
+    IEnumerator BubblePop()
+    {
+        //sprite.sprite = bubblePopSprite;
+        yield return new WaitForSeconds(pauseDuration);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     // Coroutine untuk menggerakkan secara horizontal
     IEnumerator MoveHorizontal(Vector3 direction)
@@ -134,7 +132,13 @@ public class CatTurun : MonoBehaviour
             CurrentSpeed = downSpeed / 2;
             warnaMemudar();
         }
+
+        if (collision.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstackle"))
