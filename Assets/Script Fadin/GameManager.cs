@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
         {
             backToMenuButton[i].onClick.AddListener(() => SceneMover.instance.PindahScene("Main Menu"));
         }
+        isFinished = false;
+        isFailed = false;
+        isPaused = false;
+        starCount = 0;
     }
 
     private void Update()
