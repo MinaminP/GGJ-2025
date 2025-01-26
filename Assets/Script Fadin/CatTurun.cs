@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class CatTurun : MonoBehaviour
 {
-    public float downSpeed = 2f; 
-    public float horizontalSpeed = 5f; 
-    public float pauseDuration = 2f; 
+    public float downSpeed = 2f;
+    public float horizontalSpeed = 5f;
+    public float pauseDuration = 2f;
     public float horizontalMoveDuration = 0.5f;
     public float fadeSpeed = 0.2f;
 
@@ -50,11 +50,11 @@ public class CatTurun : MonoBehaviour
         if (Input.GetAxis("Horizontal") == 0)
         {
             isMovingSideways = false;
-            //sprite.sprite = dropletSprite;
-        } 
+            sprite.sprite = dropletSprite;
+        }
         else
         {
-            //sprite.sprite = bubbleSprite;
+            sprite.sprite = bubbleSprite;
             isMovingSideways = true;
         }
 
@@ -62,7 +62,7 @@ public class CatTurun : MonoBehaviour
         {
             transform.Translate(Vector3.down * CurrentSpeed * Time.deltaTime);
             DecreaseScale();
-        } 
+        }
         else
         {
             IncreaseScale();
@@ -78,7 +78,7 @@ public class CatTurun : MonoBehaviour
         if (currentScale <= 0.2f)
         {
             currentScale = 0.2f;
-        }   
+        }
         else
         {
             currentScale -= Time.deltaTime / shrinkRate;
