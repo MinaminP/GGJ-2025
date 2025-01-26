@@ -870,8 +870,8 @@ MonoBehaviour:
   - {fileID: 1578771641}
   - {fileID: 516334821}
   pauseButton: {fileID: 1764334052}
-  currentlevel: 1
-  nextLevel: 2
+  currentlevel: 2
+  nextLevel: 3
 --- !u!4 &556907901
 Transform:
   m_ObjectHideFlags: 0

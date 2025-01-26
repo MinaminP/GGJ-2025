@@ -18,7 +18,8 @@ public class PaintTrail : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CreateTrail();
+        if(paintDroplet != null)
+            CreateTrail();
     }
 
     void CreateTrail()

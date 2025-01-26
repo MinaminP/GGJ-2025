@@ -16,8 +16,10 @@ public class CatTurun : MonoBehaviour
 
     Rigidbody2D rb;
 
+    Animator anim;
+
     [SerializeField] float moveInput;
-    [SerializeField] Sprite dropletSprite, bubbleSprite, bubblePopSprite;
+    [SerializeField] Sprite dropletSprite, bubbleSprite;
 
     public float maxScale;
     public float currentScale;
@@ -31,12 +33,16 @@ public class CatTurun : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         CurrentSpeed = downSpeed;
     }
     void Update()
     {
-        Movement();
+        if (!GameManager.isPaused)
+        {
+            Movement();
+        }
     }
 
     void Movement()
@@ -95,34 +101,10 @@ public class CatTurun : MonoBehaviour
 
     IEnumerator BubblePop()
     {
-        //sprite.sprite = bubblePopSprite;
+        anim.SetTrigger("bubblePop");
         yield return new WaitForSeconds(pauseDuration);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    // Coroutine untuk menggerakkan secara horizontal
-    IEnumerator MoveHorizontal(Vector3 direction)
-    {
-        isMovingSideways = true; // Menandai sedang bergerak horizontal
-        float elapsedTime = 0f; // Waktu yang telah berlalu
-
-        Vector3 startPosition = transform.position; // Posisi awal
-        Vector3 targetPosition = startPosition + (direction * horizontalSpeed); // Posisi tujuan
-
-        while (elapsedTime < horizontalMoveDuration)
-        {
-            // Lerp posisi dari awal ke tujuan
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / horizontalMoveDuration);
-            elapsedTime += Time.deltaTime; // Tambahkan waktu frame
-            yield return null; // Tunggu satu frame
-        }
-
-        // Pastikan posisi akhir sesuai tujuan
-        transform.position = targetPosition;
-
-        // Tunggu beberapa detik sebelum melanjutkan gerakan vertikal
-        yield return new WaitForSeconds(pauseDuration);
-        isMovingSideways = false; // Melanjutkan gerakan vertikal
+        Destroy(gameObject);
+        GameManager.isFailed = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -135,7 +117,8 @@ public class CatTurun : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Destroy(this.gameObject);
+            GameManager.isFinished = true;
         }
     }
 
@@ -156,7 +139,7 @@ public class CatTurun : MonoBehaviour
 
         if (currentColor.a < fadeSpeed)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameManager.isFailed = true;
         }
     }
 }
