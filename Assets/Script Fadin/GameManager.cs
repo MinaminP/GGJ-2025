@@ -83,4 +83,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level " + nextLevel);
     }
+
+    public void GantiScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

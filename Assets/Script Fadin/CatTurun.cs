@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class CatTurun : MonoBehaviour
 {
+    [SerializeField] private AudioSource meletup;
+
     public float downSpeed = 2f;
     public float horizontalSpeed = 5f;
     public float pauseDuration = 2f;
@@ -141,5 +143,10 @@ public class CatTurun : MonoBehaviour
         {
             GameManager.isFailed = true;
         }
+    }
+
+    public void SoundMeletup()
+    {
+        meletup.Play();
     }
 }

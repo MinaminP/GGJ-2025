@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Button quit;
     [SerializeField] string playSceneName;
     // Start is called before the first frame update
+
     void Start()
     {
         startButton.onClick.AddListener(() => SceneMover.instance.PindahScene(playSceneName));
